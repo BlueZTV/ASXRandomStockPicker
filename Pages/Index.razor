@@ -1,0 +1,58 @@
+﻿@page "/"
+@inject HttpClient Http
+
+@if (stocks == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <div class="Empty">
+
+    </div>
+    <div class="CentreBox">
+        <h1>Random ASX Stock Picker</h1>
+        <p>Because making choices is hard</p>
+        <hr style="height:2px;border-width:0;color:white;background-color:white">
+        <h1>Stock Ticker: @stock.ASXCode</h1>
+        <h2>Company Name: @(CapitalFirst(stock.CompanyName.ToString()))</h2>
+        <a href="https://www2.asx.com.au/markets/company/@(stock.ASXCode)" target="_blank">ASX Info</a>
+        <br />
+        <hr style="height:2px;border-width:0;color:white;background-color:white">
+        <button class="btn btn-primary" @onclick="PickStock">Get new stock</button>
+    </div>
+
+    <div class="fixed-bottom">
+        <a href="https://github.com/BlueZ76" target="_blank">Made By BlueZ76</a>
+    </div>
+}
+
+@code {
+    private CStock stock = new CStock();
+
+    private void PickStock()
+    {
+        Random numo = new Random();
+        stock = stocks[numo.Next(2000)];
+    }
+
+    private string CapitalFirst(string Input)
+    {
+        string o = System.Text.RegularExpressions.Regex.Replace(Input.ToLower(), @"(^\w)|(\s\w)", m => m.Value.ToUpper());
+        return o;
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        stocks = await Http.GetFromJsonAsync<CStock[]>("Data/ASXStocks.json");
+        PickStock();
+    }
+
+    private CStock[] stocks;
+
+    public class CStock
+    {
+        public string ASXCode { get; set; }
+        public string CompanyName { get; set; }
+    }
+}
