@@ -1,0 +1,10 @@
+/* /Shared/MainLayout.razor.rz.scp.css */
+.page[b-qcw4qkmhi0] {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.main[b-qcw4qkmhi0] {
+    flex: 1;
+}
