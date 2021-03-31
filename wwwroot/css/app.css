@@ -43,13 +43,27 @@ p, h1, h2, h3 {
 .CentreBox {
     font-size: 25px;
     color: white;
-    width: 60%;
+    width: 100%;
     border-radius: 30px;
     padding: 20px;
     background-color: rgba(0,0,0,0.85);
     margin: auto;
     display: block;
     text-align: center;
+}
+
+@media (min-width: 600px) {
+    .CentreBox {
+        font-size: 25px;
+        color: white;
+        width: 60%;
+        border-radius: 30px;
+        padding: 20px;
+        background-color: rgba(0,0,0,0.85);
+        margin: auto;
+        display: block;
+        text-align: center;
+    }
 }
 
 .btn-primary {
