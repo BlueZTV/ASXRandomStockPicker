@@ -9,8 +9,12 @@ a, .btn-link {
     color: #0366d6;
 }
 
-p, h1, h2, h3 {
+h1, h2, h3 {
     color: white;
+}
+
+p{
+    color: grey;
 }
 
 .btn-primary {

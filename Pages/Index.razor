@@ -29,11 +29,11 @@ else
 
 @code {
     private CStock stock = new CStock();
+    Random numo = new Random();
 
     private void PickStock()
     {
-        Random numo = new Random();
-        stock = stocks[numo.Next(2000)];
+        stock = stocks[numo.Next(stocks.Length)];
     }
 
     private string CapitalFirst(string Input)
@@ -44,7 +44,9 @@ else
 
     protected override async Task OnInitializedAsync()
     {
+        //On website load populate the stocks array so it only has to be done once
         stocks = await Http.GetFromJsonAsync<CStock[]>("Data/ASXStocks.json");
+        //Pick a stock initially so the user has something to look at
         PickStock();
     }
 
@@ -54,5 +56,6 @@ else
     {
         public string ASXCode { get; set; }
         public string CompanyName { get; set; }
+        //Chose to exclude Date and the industry because info can be found on the ASX website
     }
 }
